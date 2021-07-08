@@ -1,13 +1,13 @@
-# LiveView June 2021 class info. Your homework. 
+# OTP/Elixir July 2021 class info. Your homework. 
 
-## 1 Install these tools, plus Elixir, plus Phoenix. 
+## 1 Install these tools, plus Elixir
 
 The tools you will need to install: 
 
 - zoom 
 - git (https://git-scm.com/downloads). 
 - an editor that you are comfortable with. 
-- a working PostgreSQL install
+- a working Elixir/OTP install
 
 For the development dependencies, you'll need: 
 
@@ -22,26 +22,14 @@ Erlang/OTP 23 [erts-11.0] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-thr
 Elixir 1.11.2 (compiled with Erlang/OTP 23)
 ```
 
-- node.js. Not optional! for Phoenix assets (I'm running npm -v 6.13.4)
-- Phoenix 1.5.7+ (It includes LiveView.)
+It's best if you can also run Observer: 
 
-
-Is Phoenix working? Make sure you can run this command: 
-
-```
-mix phx.new demo --live
-(say yes to fetch dependencies and assets)
+```elixir
+iex(1)> :observer.start()
+:ok
 ```
 
-and make sure you can then create the database: 
-
-```
-cd demo
-mix ecto.create
-```
-
-Don't save this for the last minute! There are a few dependencies that will give you trouble if you've never done this before and decide to wait. 
-
+Make sure your Elixir installation is working!
 
 ## 2. Clone this repository
 
