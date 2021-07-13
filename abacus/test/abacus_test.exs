@@ -1,4 +1,4 @@
-defmodule AbacusTest do
+  defmodule AbacusTest do
   use ExUnit.Case
   doctest Abacus
 

@@ -8,7 +8,7 @@ defmodule Abacus.Counter do
   end
 
   def render(integer) do
-  	Integer.to_string(integer)
+  	"The answer is #{integer}"
   end
 
 end
