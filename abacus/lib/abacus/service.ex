@@ -11,6 +11,17 @@ defmodule Abacus.Service do
     spawn(fn -> loop(initial_state) end)
   end
 
+  def read(counter) do
+    send(counter, {:state, self()})
+    receive do
+      count -> count
+    end
+  end
+
+  def increment(counter) do
+    send(counter, :inc)
+  end
+
   def loop(count) do
     count
     |> listen
