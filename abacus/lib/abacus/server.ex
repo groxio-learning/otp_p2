@@ -2,15 +2,20 @@ defmodule Abacus.Server do
   use GenServer
   alias Abacus.Counter
 
-  def start_link(string) do
-    GenServer.start_link(__MODULE__, string)
+  def start_link({initial_value, name}) do
+    IO.puts("Restarting #{name}")
+    GenServer.start_link(__MODULE__, initial_value, name: name)
   end
 
-  def increment(counter) do
+  def increment(counter \\ __MODULE__) do
     GenServer.cast(counter, :inc)
   end
 
-  def read(counter) do
+  def annhilate(counter \\ __MODULE__) do
+    GenServer.cast(counter, :boom)
+  end
+
+  def read(counter \\ __MODULE__) do
     GenServer.call(counter, :state)
   end
 
@@ -28,4 +33,11 @@ defmodule Abacus.Server do
     {:noreply, Counter.add(count, 1)}
   end
 
+  def handle_cast(:boom, _count) do
+    raise "boom"
+  end
+
+  def child_spec({initial_value, name})  do
+    %{id: name, start: {__MODULE__, :start_link, [{initial_value, name}]}}
+  end
 end
