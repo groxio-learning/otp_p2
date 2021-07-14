@@ -10,19 +10,20 @@ defmodule Brainiac.Score do
 
   defp reds(answer , guess) do
     Enum.zip(answer, guess)|> Enum.count(fn {x, y} -> x==y end)
-
   end
 
   defp whites(answer, guess, number_of_red) do
-    guess
-    |> Enum.filter(fn x -> Enum.member?(answer, x) end)
-    |> Enum.count()
-    |> Kernel.-(number_of_red)
+    Enum.count(answer) - number_of_red - misses(answer, guess)
+  end
 
-
+  defp misses(answer, guess) do
+    (answer -- guess)
+    |> Enum.count
   end
 
   def pretty(%{red: red, white: white}) do
-    [List.duplicate("R", red) , List.duplicate("W", white)] |> List.flatten() |> Enum.join()
+    [List.duplicate("R", red) , List.duplicate("W", white)]
+    |> List.flatten()
+    |> Enum.join()
   end
 end
