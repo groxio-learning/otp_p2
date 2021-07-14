@@ -1,4 +1,5 @@
 defmodule Brainiac.Game do
+  alias Brainiac.Score
 
   defstruct [:moves, :answer]
 
@@ -24,4 +25,32 @@ defmodule Brainiac.Game do
         :playing
     end
   end
+
+  defp score(move, answer) do
+    pretty_score = answer
+    |> Score.new(move)
+    |> Score.pretty
+
+    ~s'#{Enum.join(move , " ")} #{pretty_score}'
+  end
+
+  defp pretty_board(game) do
+    game.moves
+    |> Enum.map(fn move -> score(move, game.answer) end)
+    |> Enum.join("\n")
+  end
+
+  defp pretty_status(game) do
+    status(game)
+    |> Atom.to_string
+    |> String.capitalize
+  end
+
+  def pretty(game) do
+    pretty_game_board = pretty_board(game)
+    pretty_status = pretty_status(game)
+
+    ~s"#{pretty_game_board}\n#{pretty_status}"
+  end
+
 end
