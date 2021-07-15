@@ -14,6 +14,9 @@ defmodule Brainiac.Server do
     |> IO.puts
   end
 
+  def kill(game \\ __MODULE__) do
+    send(game, :kill)
+  end
 
   # # Callbacks
   # def start_link({initial_value, name}) do
@@ -36,6 +39,14 @@ defmodule Brainiac.Server do
     # |> Enum.map(fn _ -> [1, 2, 3, 4] end)
     # |> Enum.reduce(Game.new([1,2,3,5]), &Game.guess(&2, &1))
     # |> Game.status
+  end
+
+  def child_spec(name)  do
+    %{id: name, start: {__MODULE__, :start_link, [name]}}
+  end
+
+  def handle_info(:kill, _state) do
+    raise "boom"
   end
 
 end
