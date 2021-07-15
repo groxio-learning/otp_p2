@@ -1,18 +1,10 @@
 defmodule Brainiac do
-  @moduledoc """
-  Documentation for `Brainiac`.
-  """
 
-  @doc """
-  Hello world.
+  def start_game(name) do
+    {:ok, _} = DynamicSupervisor.start_child(Brainiac.DynamicSupervisor, {Brainiac.Server, name})
+  end
 
-  ## Examples
-
-      iex> Brainiac.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def guess(name, guess) do
+    Brainiac.Server.guess(name, guess)
   end
 end
