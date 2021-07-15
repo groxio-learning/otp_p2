@@ -9,7 +9,8 @@ defmodule Brainiac.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Brainiac.Worker.start_link(arg)
-      # {Brainiac.Worker, arg}
+      {Brainiac.Server, :prabhakar}
+      # {DynamicSupervisor, strategy: :one_for_one, name: Brainiac.DynamicSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

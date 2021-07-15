@@ -2,6 +2,19 @@ defmodule Brainiac.Server do
   use GenServer
   alias Brainiac.Game
 
+
+  def start_link(name) do
+    IO.puts("Restarting #{name}")
+    GenServer.start_link(__MODULE__, :unused, name: name)
+  end
+
+  def guess(game \\ __MODULE__, cur_guess) do
+    game
+    |> GenServer.call({:move, cur_guess})
+    |> IO.puts
+  end
+
+
   # # Callbacks
   # def start_link({initial_value, name}) do
   #   GenServer.start_link(__MODULE__, initial_value, name: name)
